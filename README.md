@@ -1,4 +1,4 @@
-#Drag-resize JS library
+# Drag-resize JS library
 
 For moving and resizing elements
 
