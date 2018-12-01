@@ -1,0 +1,23 @@
+{
+  "name": "drag-resize",
+  "version": "1.0.0",
+  "description": "Drag, resize library on VanillaJS",
+  "main": "index.js",
+  "dependencies": {
+    "electron": "^3.0.10"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ruslang02/drag-resize.git"
+  },
+  "author": "Ruslan Garifullin <ruslan.g2002@gmail.com>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/ruslang02/drag-resize/issues"
+  },
+  "homepage": "https://github.com/ruslang02/drag-resize#readme"
+}
