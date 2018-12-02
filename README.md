@@ -4,7 +4,7 @@ For moving and resizing elements, only VanillaJS, maximum performance
 
 Electron is _not_ required.
 
-###Brief usage info
+##Brief usage info
 
 **new DragResize(element, options)**
 
@@ -15,7 +15,7 @@ Electron is _not_ required.
    - cancel - selector of nodes that cancel triggering drag
    - triggerSize - _integer_, size in PX of resize triggers
  
-###Example
+##Example
 ```html
 <body>
 <window>
