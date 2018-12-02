@@ -6,25 +6,31 @@ Electron is _not_ required.
 
 ### Brief usage info
 
-**new DragResize(element, options)**
+**new Draggable(element, options)**
 
- - element - DOMNode to make draggable and resizable
+ - element - DOMNode to make draggable
  - options
  
    - handle - selector of nodes to trigger draggable _!important_
    - cancel - selector of nodes that cancel triggering drag
-   - triggerSize - _integer_, size in PX of resize triggers
  
+**new Resizable(element, options)**
+
+ - element - DOMNode to make resizable
+ - options
+ 
+   - triggerSize - _integer_, size in PX of resize triggers
+   - edges: {top: _bool_, left: _bool_, right: _bool_, bottom: _bool_}, controls where to put triggers
 ### Example
 ```html
 <body>
-<window>
-  <window-header>Hey, this is a title</window-header>
-  <window-body>
+<div id="window">
+  <header>Hey, this is a title</header>
+  <main>
     I am not triggering drag
     <div id="forceDrag">But I do!</div>
-  </window-body>
-</window>
+  </main>
+</div>
 <style>
 #forceDrag {width:50px;height:50px;border:2px solid black;}
 </style>
@@ -33,9 +39,16 @@ Electron is _not_ required.
 </body>
 ```
 ```javascript
-new DragResize(document.querySelector("window"), {
-  cancel: "window-body",
-  handle: "#forcedrag",
-  triggerSize: 10 //px
-})
+new Draggable(document.querySelector("#window"), {
+  cancel: "main",
+  handle: "#dragArea"
+});
+new Resizable(document.querySelector("#window"), {
+  edges: {
+    top: true,
+    left:true,
+    bottom:true,
+    right:true
+  }
+});
 ```

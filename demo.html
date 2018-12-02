@@ -21,7 +21,7 @@
 		padding:0
 	}
 
-	#window {
+	#window, #window2 {
 		border: 1px solid black;
 		width:400px;
 		height:300px;
@@ -44,9 +44,17 @@
 </style>
 <script src="dragresize.js"></script>
 <script>
-	new DragResize(document.querySelector("#window"), {
+	let drag = new Draggable(document.querySelector("#window"), {
 		cancel: "main",
 		handle: "#dragArea"
+	});
+	let resize = new Resizable(document.querySelector("#window"), {
+		edges: {
+			top: true,
+			left: true,
+			bottom: true,
+			right: true
+		}
 	});
 </script>
 </body>
