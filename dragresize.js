@@ -6,35 +6,35 @@ class DragResize {
 		this.isDragging = false;
 		this.cancel = false;
 		this.force = false;
-		this.options = options;
+		this.options = options || {
+			cancel: null,
+			handle: null,
+			triggerSize: 10
+		};
 		let self = this;
 
 
-		root.addEventListener("mousedown", e => {
-			this.isDragging = true;
-		});
-		document.body.addEventListener("mouseup", e => {
+		root.addEventListener("mousedown", () => this.isDragging = true);
+		document.body.addEventListener("mouseup", () => {
 			this.isDragging = false;
 			this.isResizing = false;
 			this.cancel = false;
 			this.force = false;
 		});
-		if(options.handle) {
-			document.querySelectorAll(options.handle).forEach(elem => {
-				elem.addEventListener("mousedown", e => self.force = true)
-			})
-		}
-		if(options.cancel) {
-			document.querySelectorAll(options.cancel).forEach(elem => {
-				elem.addEventListener("mousedown", e => self.cancel = true)
-			})
-		}
+		if (options.handle)
+			this.element.querySelectorAll(options.handle).forEach(elem => {
+				elem.addEventListener("mousedown", () => self.force = true)
+			});
+		if (options.cancel)
+			this.element.querySelectorAll(options.cancel).forEach(elem => {
+				elem.addEventListener("mousedown", () => self.cancel = true)
+			});
 		document.body.addEventListener("mousemove", drag);
 		function drag(e) {
 			console.log(self.isDragging);
 			if(self.isDragging && !self.isResizing && (!self.cancel || self.force)) {
-				self.element.style.left = CSS.px(e.clientX - self.drag.prevX);
-				self.element.style.top = CSS.px(e.clientY - self.drag.prevY);
+				self.element.style.left = (e.clientX - self.drag.prevX) + "px";
+				self.element.style.top = (e.clientY - self.drag.prevY) + "px";
 			} else {
 				self.drag.prevX = e.clientX - self.element.offsetLeft;
 				self.drag.prevY = e.clientY - self.element.offsetTop;
@@ -90,38 +90,38 @@ class DragResize {
 			if(r) {
 				switch(r) {
 					case 1:
-						self.element.style.top = CSS.px(self.element.offsetTop + (e.clientY - self.resize.prevY));
-						self.element.style.height = CSS.px(self.element.clientHeight - (e.clientY - self.resize.prevY));
-						self.element.style.left = CSS.px(self.element.offsetLeft + (e.clientX - self.resize.prevX));
-						self.element.style.width = CSS.px(self.element.clientWidth - (e.clientX - self.resize.prevX));
+						self.element.style.top = (self.element.offsetTop + (e.clientY - self.resize.prevY)) + "px";
+						self.element.style.height = (self.element.clientHeight - (e.clientY - self.resize.prevY)) + "px";
+						self.element.style.left = (self.element.offsetLeft + (e.clientX - self.resize.prevX)) + "px";
+						self.element.style.width = (self.element.clientWidth - (e.clientX - self.resize.prevX)) + "px";
 						break;
 					case 2:
-						self.element.style.top = CSS.px(self.element.offsetTop + (e.clientY - self.resize.prevY));
-						self.element.style.height = CSS.px(self.element.clientHeight - (e.clientY - self.resize.prevY));
+						self.element.style.top = (self.element.offsetTop + (e.clientY - self.resize.prevY)) + "px";
+						self.element.style.height = (self.element.clientHeight - (e.clientY - self.resize.prevY)) + "px";
 						break;
 					case 3:
-						self.element.style.top = CSS.px(self.element.offsetTop + (e.clientY - self.resize.prevY));
-						self.element.style.height = CSS.px(self.element.clientHeight - (e.clientY - self.resize.prevY));
-						self.element.style.width = CSS.px(self.element.clientWidth + (e.clientX - self.resize.prevX));
+						self.element.style.top = (self.element.offsetTop + (e.clientY - self.resize.prevY)) + "px";
+						self.element.style.height = (self.element.clientHeight - (e.clientY - self.resize.prevY)) + "px";
+						self.element.style.width = (self.element.clientWidth + (e.clientX - self.resize.prevX)) + "px";
 						break;
 					case 4:
-						self.element.style.width = CSS.px(self.element.clientWidth + (e.clientX - self.resize.prevX));
+						self.element.style.width = (self.element.clientWidth + (e.clientX - self.resize.prevX)) + "px";
 						break;
 					case 5:
-						self.element.style.width = CSS.px(self.element.clientWidth + (e.clientX - self.resize.prevX));
-						self.element.style.height = CSS.px(self.element.clientHeight + (e.clientY - self.resize.prevY));
+						self.element.style.width = (self.element.clientWidth + (e.clientX - self.resize.prevX)) + "px";
+						self.element.style.height = (self.element.clientHeight + (e.clientY - self.resize.prevY)) + "px";
 						break;
 					case 6:
-						self.element.style.height = CSS.px(self.element.clientHeight + (e.clientY - self.resize.prevY));
+						self.element.style.height = (self.element.clientHeight + (e.clientY - self.resize.prevY)) + "px";
 						break;
 					case 7:
-						self.element.style.left = CSS.px(self.element.offsetLeft + (e.clientX - self.resize.prevX));
-						self.element.style.width = CSS.px(self.element.clientWidth - (e.clientX - self.resize.prevX));
-						self.element.style.height = CSS.px(self.element.clientHeight + (e.clientY - self.resize.prevY));
+						self.element.style.left = (self.element.offsetLeft + (e.clientX - self.resize.prevX)) + "px";
+						self.element.style.width = (self.element.clientWidth - (e.clientX - self.resize.prevX)) + "px";
+						self.element.style.height = (self.element.clientHeight + (e.clientY - self.resize.prevY)) + "px";
 						break;
 					case 8:
-						self.element.style.width = CSS.px(self.element.clientWidth - (e.clientX - self.resize.prevX));
-						self.element.style.left = CSS.px(self.element.offsetLeft + (e.clientX - self.resize.prevX));
+						self.element.style.width = (self.element.clientWidth - (e.clientX - self.resize.prevX)) + "px";
+						self.element.style.left = (self.element.offsetLeft + (e.clientX - self.resize.prevX)) + "px";
 						break;
 				}
 				self.resize.prevX = e.clientX;
